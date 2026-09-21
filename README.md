@@ -4,7 +4,7 @@
 
 This is that handoff, packaged as an Agent Skill. When the building agent finishes, it says what changed, what it checked, what it didn't, and where the proof is — keeping facts, evidence and its own claims apart. Then it stops: another agent checks the work, and a person decides.
 
-It is the partner of [an engineering standard for AI agents](https://github.com/itsmk91/agent-engineering-standard). That one decides how the work is built; this one decides how it is handed over.
+It is the partner of [an engineering standard for AI agents](https://github.com/workspace-labs/agent-engineering-standard). That one decides how the work is built; this one decides how it is handed over.
 
 The skill is in this repo — [`skills/`](skills).
 
@@ -33,13 +33,13 @@ The skill is in this repo — [`skills/`](skills).
 One line, for every project on your machine:
 
 ```bash
-npx skills add itsmk91/agent-builder-handoff -g
+npx skills add workspace-labs/agent-builder-handoff -g
 ```
 
 Or copy it by hand:
 
 ```bash
-git clone https://github.com/itsmk91/agent-builder-handoff.git
+git clone https://github.com/workspace-labs/agent-builder-handoff.git
 mkdir -p ~/.claude/skills
 cp -R agent-builder-handoff/skills/engineering-builder-handoff ~/.claude/skills/
 ```
@@ -68,4 +68,4 @@ It loads on its own when the builder finishes engineering work. The core is [`SK
 
 ---
 
-<sub>by Workspace Labs · Drawn from a working system, not a thought experiment — see <a href="https://github.com/itsmk91/workspace">a showcase of it running</a>, and the patterns beside it: <a href="https://github.com/itsmk91/agent-engineering-standard">an engineering standard for AI agents</a>, <a href="https://github.com/itsmk91/agent-health-checks">health checks for AI agents</a> and <a href="https://github.com/itsmk91/agent-separation-of-duties">separation of duties for AI agents</a>.</sub>
+<sub>by Workspace Labs · Drawn from a working system, not a thought experiment — see <a href="https://github.com/workspace-labs/workspace">a showcase of it running</a>, and the patterns beside it: <a href="https://github.com/workspace-labs/agent-engineering-standard">an engineering standard for AI agents</a>, <a href="https://github.com/workspace-labs/agent-health-checks">health checks for AI agents</a> and <a href="https://github.com/workspace-labs/agent-separation-of-duties">separation of duties for AI agents</a>.</sub>

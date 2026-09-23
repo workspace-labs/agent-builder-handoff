@@ -1,6 +1,6 @@
 ---
 name: engineering-builder-handoff
-description: "Use before sending the final message of any software engineering work Claude did as the builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, repository restructuring, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also use when the user says finish and give me the report, prepare this for Codex, handoff to Codex, engineering report, review handoff, or stop after the report. Turns a bare done, fixed or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff an independent reviewer such as Codex can verify in a new session, separating facts, evidence, builder claims, unverified items, limitations, open findings and owner decisions, then stopping at the next gate. Complements software-engineering-build-standard; not for reviewing another agent's work."
+description: "Use before sending the final message of meaningful software engineering work Claude did as the builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, repository restructuring, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also use when the user says finish and give me the report, prepare this for Codex, handoff to Codex, engineering report, review handoff, or stop after the report. Not needed for a mechanical, low-risk edit such as a typo, copy or formatting fix, unless a report is asked for. Turns a bare done, fixed or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff an independent reviewer such as Codex can verify in a new session, then stops at the next gate. Complements software-engineering-build-standard; not for reviewing another agent's work."
 ---
 
 # Engineering Builder Handoff
@@ -39,13 +39,13 @@ The flow is **BUILD → VERIFY → EVIDENCE → HANDOFF → STOP → INDEPENDENT
 
 Use it when Claude has completed meaningful engineering work: a feature, bug fix, corrective patch, refactor, repository restructuring, architecture slice, persistence, migration or database work, build or release work, signing, platform integration, test-architecture or tooling change, documentation foundation, technical-debt remediation, security-sensitive change, or data-model or state-model change. Use it also when the owner says "finish and give me the report", "prepare this for Codex", "handoff to Codex", "give me the engineering report", "prepare the review handoff" or "stop after the report".
 
-It does not apply to mid-task progress notes, plans written before building, answers to questions, or reviews of someone else's work. One task gets one handoff at the end — or a Blocked handoff earlier, when the work has to stop.
+It does not apply to mid-task progress notes, plans written before building, answers to questions, or reviews of someone else's work. A mechanical, low-risk edit — a typo, copy or formatting change with no effect on behavior — ends with a one-line summary instead, unless the owner asks for a report. Risk decides, not size: a one-line change to configuration, security, persisted data, a public interface or release identity is not mechanical and gets at least a Compact handoff. One task gets one handoff at the end — or a Blocked handoff earlier, when the work has to stop.
 
 ## 1. Choose the size (H2) and the mode
 
 | Size | Use for | Shape |
 |---|---|---|
-| **Compact** | tiny isolated bug, small UI correction, small configuration fix, narrow documentation correction | a few short lines; template below |
+| **Compact** | tiny isolated bug, small UI correction, small configuration fix, narrow documentation correction that is more than a mechanical fix | a few short lines; template below |
 | **Standard** | normal feature, meaningful bug fix, moderate refactor, tooling change, repository change | the Standard order below |
 | **Full** | architecture, persistence or migration, data-model change, signing or release identity, platform change, repository restructuring, high-risk corrective patch, sensitive data operation, major feature foundation | the Standard order, the sections Full always addresses, and the matching mode |
 
@@ -66,7 +66,7 @@ Size follows risk and blast radius, not diff size: a one-line change to persiste
 
 Take every fact from the repository and from runs that actually happened, never from memory or assumption:
 
-- **Baseline** (H3): project, version, branch, starting commit, prior accepted state or finding, working-tree state, test baseline. Record it before the first edit when you can. A test baseline not captured then is established by running the tests at the exact base commit afterwards — for example in a separate worktree — and saying so. Never invent one: write `BASELINE NOT ESTABLISHED` or `TEST BASELINE: NOT ESTABLISHED` and explain the limitation.
+- **Baseline** (H3): project, version, branch, starting commit, prior accepted state or finding, working-tree state, test baseline. Record it before the first edit when you can. A test baseline not captured then is established by running the tests at the exact base commit afterwards — for example in a separate worktree — and saying so. Never invent one: write `BASELINE NOT ESTABLISHED` or `TEST BASELINE: NOT ESTABLISHED` and explain the limitation. Report a test baseline only together with the command that produced it and when it ran — before the first edit, or afterwards at the exact base commit. A run of new tests against old code is an old-fails proof, not a baseline.
 - **Scope and owner decisions** (H4): what was AUTHORIZED, what was NOT AUTHORIZED, and the owner decisions that shaped the work.
 - **Changed files** from the real diff against the baseline, including generated and unexpected files (H6, H61).
 - **Verification that actually ran**, with exact counts, and every relevant check that did not (H11, H48).

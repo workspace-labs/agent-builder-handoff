@@ -1,6 +1,6 @@
 ---
 name: engineering-builder-handoff
-description: "Use before sending the final message of meaningful software engineering work Claude did as the builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, repository restructuring, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also use when the user says finish and give me the report, prepare this for Codex, handoff to Codex, engineering report, review handoff, or stop after the report. Not needed for a mechanical, low-risk edit such as a typo, copy or formatting fix, unless a report is asked for. Turns a bare done, fixed or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff an independent reviewer such as Codex can verify in a new session, then stops at the next gate. Complements software-engineering-build-standard; not for reviewing another agent's work."
+description: "Use before the final message of meaningful engineering work Claude did as builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also when the user says finish and give me the report, prepare this for Codex, review handoff, or stop after the report. Not for a mechanical edit like a typo or copy fix unless a report is asked. Turns a bare done or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff a cold-session reviewer can verify, then stops. When the owner carries it to another session (review prompt, paste to Codex, agent to agent), it ships paste-ready with the reviewer's reply instructions, re-emitted each round. Complements software-engineering-build-standard; not for reviewing another agent's work."
 ---
 
 # Engineering Builder Handoff
@@ -9,7 +9,7 @@ When Claude, as the builder, finishes meaningful software engineering work, it d
 
 **Golden principle (H66):** the handoff is not written to prove Claude was right. It is written so another engineer can efficiently determine whether Claude was right.
 
-Anchors H1–H66 follow this standard's source specification, which has no H38. The `H` prefix keeps them distinct from the `§` anchors of software-engineering-build-standard. They are for citing this standard; handoffs do not need to include them.
+Anchors H1–H68 follow this standard's source specification, which has no H38. The `H` prefix keeps them distinct from the `§` anchors of software-engineering-build-standard. They are for citing this standard; handoffs do not need to include them.
 
 ## Role boundary
 
@@ -220,6 +220,17 @@ Tell the reviewer what to verify independently: never just "Please review", and 
 
 The reviewer may be a different agent in a new session with none of this conversation. Replace "as we discussed", "the thing from before" and "same as yesterday" with exact finding IDs, commit hashes, paths, versions, contracts and reproduction steps, in the repository's own terms. Give conclusions, evidence and concise engineering rationale — not private chain-of-thought.
 
+## Human relay to another session (H67, H68)
+
+Sometimes the owner carries the handoff to the reviewer — pasted into a different agent's session that shares none of this conversation. Then the handoff travels inside a marked, paste-ready block, and it carries the instructions that make the reviewer's reply paste-ready for the trip back. The owner ferries blocks; the owner never composes them and never has to ask for them.
+
+- **When relay mode applies.** The owner says the review happens in another session — "prepare this for Codex", "give me the review prompt", "agent to agent" — or the handoff is plainly the only context the reviewer will have. A reviewer who shares this session, or reads the delivery where the project keeps it, needs no block; relay mode stays off.
+- **The block.** Wrap the whole handoff, unchanged, between `─── REVIEW PROMPT — paste to <reviewer> — round <N> ───` and `─── END REVIEW PROMPT ───`. One block per handoff; the owner copies one thing. The corrective patch after a reviewer's findings re-emits the block at the next round.
+- **The trailer.** Inside the block, after the handoff, append the reviewer instructions from `references/relay-prompt-format.md`: verify independently, report findings with file and line, and end with `APPROVED` or a `FIX PROMPT` block the owner pastes straight back. The trailer is standing text; the challenge list (H21) still says what to verify — the trailer only says how to reply. The reviewer needs no copy of this skill; the trailer carries the protocol.
+- **The return trip.** A `FIX PROMPT`, or any pasted review reply whatever its shape, is the finding source for a Corrective handoff (H25) — the trailer's format is a request, never a precondition the builder enforces. `APPROVED`, or an acceptance the authorized reviewer or owner already gave, is recorded under `ACCEPTED`, naming who gave it.
+
+A relayed handoff is still one handoff — same labels, same evidence rules, same stop at the next gate. The block adds transport, not content.
+
 ## Privacy and secrets (H37)
 
 Never put passwords, private keys, tokens, secret environment values or private user or device records into a handoff or its evidence. Report a secret's state — present, external to the repository, verified — without printing it; naming where it lives, such as an environment variable's name, is fine. Redact evidence where needed.
@@ -253,12 +264,13 @@ Before sending a handoff, confirm each item below; for a Compact or Blocked hand
 15. The Codex handoff asks for independent verification, not acceptance — or, with no independent review authorized, lists what only the builder checked.
 16. The next gate is explicit.
 17. Claude stopped instead of starting unauthorized work.
+18. When the handoff relays through the owner to another session, it is inside the REVIEW PROMPT block with the trailer appended in full (H67, H68).
 
 If any important answer is no, fix the handoff before sending it.
 
 ## References
 
-Compact and Blocked handoffs are self-contained unless an emphasis mode applies.
+Compact and Blocked handoffs are self-contained unless an emphasis mode or relay mode applies.
 
 | File | Load for | Holds |
 |---|---|---|
@@ -266,5 +278,6 @@ Compact and Blocked handoffs are self-contained unless an emphasis mode applies.
 | `references/verification-and-evidence.md` | Standard, Full and Corrective handoffs | tests, verification results, failure testing, regressions, claims and evidence, reproduction, before and after, tolerances, hashes, data preservation, repeated runs, environment, conflicting sources, performance, manual observation, private evidence |
 | `references/codex-review-handoff.md` | Full handoffs, and any Standard or Full handoff with no independent review authorized | the reviewer challenge list and its template, adversarial attack surfaces, the corrective re-review, the no-review handoff |
 | `references/specialized-handoff-modes.md` | Corrective handoffs and any emphasis mode | Corrective, Refactor, Migration / persistence, Release / signing, Device, Documentation and Architecture |
+| `references/relay-prompt-format.md` | relay mode — a handoff the owner carries to a reviewer in a different session | the paste-ready block markers and round numbering, the reviewer trailer, and the return trip |
 
-Provenance: before this skill was built, the open skills ecosystem was searched on 2026-09-17 for engineering handoff, handoff report, review handoff, implementation report and completion report skills. The nearest results were session-continuity handoffs, reviewer-side quality gates and a design-review phase; none was a builder claim package for independent review.
+Provenance: before this skill was built, the open skills ecosystem was searched on 2026-09-17 for engineering handoff, handoff report, review handoff, implementation report and completion report skills. The nearest results were session-continuity handoffs, reviewer-side quality gates and a design-review phase; none was a builder claim package for independent review. Relay mode (H67, H68) was added on 2026-09-29 for owner-ferried review loops between agents in separate sessions.

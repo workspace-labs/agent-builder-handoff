@@ -1,49 +1,42 @@
-# Last update — 2026-09-29
+# Last update — 2026-11-18
 
-## Relay mode: the handoff now travels paste-ready (H67, H68)
+## The owner's lines: every handoff opens in plain words (H69)
 
-The skill used to end at the handoff. When the owner carries that handoff to a
-reviewer in a *different* session — pasted into Codex, Claude, or any agent that
-saw none of the build — it now ships inside a marked, copy-paste-ready block, and
-it carries the instructions that make the reviewer's reply paste-ready for the
-trip back.
+A handoff is written for the reviewer: labels, paths, exact counts. The owner
+reads it first, and may not be an engineer. Until now there was nothing in it
+for them.
 
-The owner ferries blocks. The owner never composes them and never has to ask for
-them.
+Every handoff now opens with a few plain lines for the owner, above the status
+line and outside any REVIEW PROMPT block:
+
+```
+FOR YOU
+What I did: <the change, in one everyday sentence>
+Checked by me: <what ran, and what it showed>
+Not checked: <what nobody has checked yet> | nothing left out
+Your next step: <the one thing the owner does now> | nothing
+```
 
 ## What changed
 
-- **New section in `SKILL.md`** — *Human relay to another session (H67, H68)*:
-  when relay mode applies, the whole handoff wraps between
-  `─── REVIEW PROMPT — paste to <reviewer> — round <N> ───` and
-  `─── END REVIEW PROMPT ───`, with the reviewer instructions appended inside.
-- **New reference file** — `references/relay-prompt-format.md`: the block
-  markers, the full reviewer trailer, the return-trip rules, and round
-  numbering.
-- **The reviewer needs no skill.** The trailer teaches the protocol: verify
-  independently, report findings with `file:line`, and end the reply with
-  `APPROVED` — or a `FIX PROMPT` block the owner pastes straight back to the
-  builder.
-- **Rounds are numbered.** Each corrective re-review re-emits the block at the
-  next round, so a long loop stays visible to the owner.
-- **Final quality gate** gains item 18: a relayed handoff must be inside the
-  block with the trailer in full.
-- **Blocked and owner-decision handoffs carry no block** — a block travels to a
-  reviewer; a Blocked handoff travels to the owner.
+- **New section in `SKILL.md`** — *The owner's lines (H69)*: plain words, two
+  to five lines, no code marks and no capital status phrases.
+- **A summary, never an addition.** Each line repeats something the handoff
+  says and never says it more strongly. A check that failed or did not run is
+  said here too.
+- **Never a verdict.** The builder does not tell the owner to accept the work;
+  the last line names the owner's next step at the gate.
+- **The handoff below is unchanged.** Nothing is cut from the reviewer's part.
+- **Relay mode:** the owner's lines sit above the block and are never pasted
+  to the reviewer.
+- **Ordinary text, never a code block,** with bold labels: code blocks show in a
+  pale colour many owners cannot read.
+- **A start line and a stop line** in bold frame the reviewer's part, so the
+  owner sees where it begins and ends.
+- **Final quality gate** gains item 19.
 
-## The loop it closes
+## Earlier — 2026-09-29
 
-```
-builder ── REVIEW PROMPT ──▶ owner pastes ──▶ reviewer
-builder ◀── owner pastes ◀── FIX PROMPT (or APPROVED)
-builder ── REVIEW PROMPT · round 2 ──▶ … until APPROVED
-```
-
-## Compatibility
-
-Relay mode is gated: it activates when the owner says the review happens in
-another session, or when the handoff is plainly the only context the reviewer
-will have. A reviewer who shares the session needs no block — nothing changes.
-
-The description was shortened to fit the 1024-character skill contract after the
-relay triggers were added.
+Relay mode (H67, H68): a handoff the owner carries to a reviewer in another
+session ships inside a paste-ready `REVIEW PROMPT` block, with the reviewer's
+reply instructions inside it and the rounds numbered.

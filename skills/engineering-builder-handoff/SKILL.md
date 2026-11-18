@@ -9,7 +9,7 @@ When Claude, as the builder, finishes meaningful software engineering work, it d
 
 **Golden principle (H66):** the handoff is not written to prove Claude was right. It is written so another engineer can efficiently determine whether Claude was right.
 
-Anchors H1–H68 follow this standard's source specification, which has no H38. The `H` prefix keeps them distinct from the `§` anchors of software-engineering-build-standard. They are for citing this standard; handoffs do not need to include them.
+Anchors H1–H69 follow this standard's source specification, which has no H38. The `H` prefix keeps them distinct from the `§` anchors of software-engineering-build-standard. They are for citing this standard; handoffs do not need to include them.
 
 ## Role boundary
 
@@ -119,7 +119,7 @@ Use these phrases exactly where they apply:
 
 ## 5. Write the handoff
 
-Deliver it where the project expects handoffs: the final message by default, or the project's delivery note, file or tool.
+Deliver it where the project expects handoffs: the final message by default, or the project's delivery note, file or tool. Every handoff, at any size, opens with the owner's lines (H69).
 
 ### Compact
 
@@ -220,11 +220,46 @@ Tell the reviewer what to verify independently: never just "Please review", and 
 
 The reviewer may be a different agent in a new session with none of this conversation. Replace "as we discussed", "the thing from before" and "same as yesterday" with exact finding IDs, commit hashes, paths, versions, contracts and reproduction steps, in the repository's own terms. Give conclusions, evidence and concise engineering rationale — not private chain-of-thought.
 
+## The owner's lines (H69)
+
+The handoff is written for the reviewer. The owner reads it first, and may not be an engineer. So every handoff opens with a few plain lines for the owner, above the status line and outside any REVIEW PROMPT block:
+
+```
+FOR YOU
+What I did: <the change, in one everyday sentence>
+Checked by me: <what ran, and what it showed>
+Not checked: <what nobody has checked yet> | nothing left out
+Your next step: <the one thing the owner does now> | nothing
+```
+
+- **Plain words.** Short sentences, in the language the owner writes in. No code marks, no capital status phrases, no anchors, and no finding ID without a few words saying what the finding is. A file name or a command appears only when the owner has to use it.
+- **A summary, never an addition.** Each line repeats something the handoff below says, and never says it more strongly. These are the builder's own checks: do not write "proven", "verified", "safe" or "it works". A check that failed or did not run is said here too; bad news is never left for the reviewer's part alone.
+- **Never a verdict.** The builder does not tell the owner to accept the work. "Your next step" names what the owner does at the next gate: paste the block to the reviewer, make the decision a Blocked handoff is waiting for, or nothing. For a Blocked handoff, write the question and each option here, one short plain line an option, with the builder's pick marked as a recommendation; never send the owner to read them "below".
+- **Ordinary text, never a code block.** The template above is fenced only to show its shape. Write the owner's lines as normal text with each label in bold. Many terminals show code blocks and code marks in a pale colour the owner cannot read.
+- **Short, one label a line.** Each label starts its own line, as in the template; never run them together into a paragraph. One or two sentences a label. When Blocked, add one line an option.
+- **A start line and a stop line.** The owner must see at a glance where the reviewer's part begins and where it ends. Put one bold line of ordinary text directly above it and one directly below it, outside any code block and outside any REVIEW PROMPT block:
+  - above: `**▶ START — the part for <reviewer>. Copy from the next line.**` in relay mode, otherwise `**▶ START — the part for the reviewer. You do not need to read it.**`
+  - below: `**■ STOP — the part for <reviewer> ends here.**`
+
+  Nothing follows the stop line. The REVIEW PROMPT markers of relay mode stay as they are, inside these two lines.
+- **The handoff below stays whole.** After the start line, write the handoff exactly as this skill describes. Nothing is cut from it because these lines exist. When the project's delivery format already has its own place for the owner, write the lines there instead of twice.
+
+Example, for the padding fix above:
+
+```
+FOR YOU
+What I did: added more space below the Save button on the settings screen.
+Checked by me: the style check passed, and the before and after pictures look right at desktop and phone width.
+Not checked: a real phone.
+Your next step: send the report below to Codex.
+```
+
 ## Human relay to another session (H67, H68)
 
 Sometimes the owner carries the handoff to the reviewer — pasted into a different agent's session that shares none of this conversation. Then the handoff travels inside a marked, paste-ready block, and it carries the instructions that make the reviewer's reply paste-ready for the trip back. The owner ferries blocks; the owner never composes them and never has to ask for them.
 
 - **When relay mode applies.** The owner says the review happens in another session — "prepare this for Codex", "give me the review prompt", "agent to agent" — or the handoff is plainly the only context the reviewer will have. A reviewer who shares this session, or reads the delivery where the project keeps it, needs no block; relay mode stays off.
+- **The owner's lines stay outside.** They sit above the block (H69), and "Your next step" says where to paste it. The reviewer never receives them.
 - **The block.** Wrap the whole handoff, unchanged, between `─── REVIEW PROMPT — paste to <reviewer> — round <N> ───` and `─── END REVIEW PROMPT ───`. One block per handoff; the owner copies one thing. The corrective patch after a reviewer's findings re-emits the block at the next round.
 - **The trailer.** Inside the block, after the handoff, append the reviewer instructions from `references/relay-prompt-format.md`: verify independently, report findings with file and line, and end with `APPROVED` or a `FIX PROMPT` block the owner pastes straight back. The trailer is standing text; the challenge list (H21) still says what to verify — the trailer only says how to reply. The reviewer needs no copy of this skill; the trailer carries the protocol.
 - **The return trip.** A `FIX PROMPT`, or any pasted review reply whatever its shape, is the finding source for a Corrective handoff (H25) — the trailer's format is a request, never a precondition the builder enforces. `APPROVED`, or an acceptance the authorized reviewer or owner already gave, is recorded under `ACCEPTED`, naming who gave it.
@@ -265,6 +300,7 @@ Before sending a handoff, confirm each item below; for a Compact or Blocked hand
 16. The next gate is explicit.
 17. Claude stopped instead of starting unauthorized work.
 18. When the handoff relays through the owner to another session, it is inside the REVIEW PROMPT block with the trailer appended in full (H67, H68).
+19. The owner's lines open the handoff in plain words and ordinary text, say nothing the handoff does not say, give no verdict, and name the owner's next step; a bold start line and stop line frame the reviewer's part (H69).
 
 If any important answer is no, fix the handoff before sending it.
 
@@ -280,4 +316,4 @@ Compact and Blocked handoffs are self-contained unless an emphasis mode or relay
 | `references/specialized-handoff-modes.md` | Corrective handoffs and any emphasis mode | Corrective, Refactor, Migration / persistence, Release / signing, Device, Documentation and Architecture |
 | `references/relay-prompt-format.md` | relay mode — a handoff the owner carries to a reviewer in a different session | the paste-ready block markers and round numbering, the reviewer trailer, and the return trip |
 
-Provenance: before this skill was built, the open skills ecosystem was searched on 2026-09-17 for engineering handoff, handoff report, review handoff, implementation report and completion report skills. The nearest results were session-continuity handoffs, reviewer-side quality gates and a design-review phase; none was a builder claim package for independent review. Relay mode (H67, H68) was added on 2026-09-29 for owner-ferried review loops between agents in separate sessions.
+Provenance: before this skill was built, the open skills ecosystem was searched on 2026-09-17 for engineering handoff, handoff report, review handoff, implementation report and completion report skills. The nearest results were session-continuity handoffs, reviewer-side quality gates and a design-review phase; none was a builder claim package for independent review. Relay mode (H67, H68) was added on 2026-09-29 for owner-ferried review loops between agents in separate sessions. The owner's lines (H69) were added on 2026-11-18 because the owner could not read a handoff written only for the reviewer.

@@ -20,6 +20,7 @@ The skill is in this repo — [`skills/`](skills).
 
 ## What it asks of an agent
 
+- **Speak to the owner first, in plain words.** Every handoff opens with a few lines for the person who asked: what was done, what the builder checked, what nobody checked, and their next step. The reviewer's part comes after.
 - **Size the handoff by risk, not by lines changed.** A small fix gets a few lines. A one-line change to saved data gets the full report.
 - **Keep facts, evidence and claims apart.** A claim never passes as proof, and the builder's own checks are never called independent.
 - **Say what wasn't checked, and why.** A check that didn't run is written down, never left out.

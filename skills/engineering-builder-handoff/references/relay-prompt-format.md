@@ -26,6 +26,7 @@ The whole handoff, unchanged, between two marker lines:
 
 - Name the reviewer the project names — Codex when none is named.
 - Round 1 for new work. The corrective patch after a reviewer's findings re-emits the block at the next round — `round 2`, `round 3` — so fatigue in a long loop stays visible to the owner, never hidden.
+- The owner's lines (H69) sit above the block, never inside it.
 - One block per handoff. Never wrap two handoffs in one block, and never emit a block for a Blocked handoff — a block travels to a reviewer; a Blocked handoff travels to the owner.
 
 ## H68 The reviewer trailer

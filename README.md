@@ -12,9 +12,9 @@ The skill is in this repo — [`skills/`](skills).
 
 ## In practice
 
-![How a builder agent hands over finished work: where the handoff sits, one small fix handed over line by line, the words it writes instead of "done", and the rules it keeps](media/how-i-hand-over-finished-work.png)
+![builderhandoff. One finished job, one handoff, two readers: plain words for you on top, and the proof for the reviewer between a START line and a STOP line.](media/builder-handoff-hero.png)
 
-*One small fix, handed over on the author's own board. Facts, evidence, claims and gaps stay apart — and then the builder stops.*
+*One small fix, handed over. You read four plain lines. The reviewer gets the proof, between START and STOP. Then the builder stops.*
 
 ---
 

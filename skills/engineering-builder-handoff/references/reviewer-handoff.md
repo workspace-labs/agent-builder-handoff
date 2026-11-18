@@ -1,6 +1,6 @@
-# Codex review handoff
+# Reviewer handoff
 
-The part of the handoff that tells the independent reviewer what to verify. The reviewer is the one the project names — Codex when none is named — and these rules apply to any independent reviewer. The purpose is to make an independent review efficient, never to steer its conclusion. The builder is not the reviewer, and nothing written here is a review.
+The part of the handoff that tells the independent reviewer what to verify. The reviewer is the one the project or the owner names — "the reviewer" when none is named — and these rules apply to any independent reviewer. The purpose is to make an independent review efficient, never to steer its conclusion. The builder is not the reviewer, and nothing written here is a review.
 
 ## Contents
 
@@ -62,7 +62,7 @@ Never end with "Please review." Write concrete things for the reviewer to determ
 Inside a Standard or Full handoff, point to earlier sections instead of repeating their facts. When this section is sent on its own — pasted into another tool, for example — it must carry the target commit and the builder's counts itself.
 
 ```
-CODEX HANDOFF — independent verification requested
+REVIEWER HANDOFF — independent verification requested
 REVIEW TARGET: <commit and base, or the uncommitted diff hash> (details: BASELINE and GIT)
 CONTRACT TO VERIFY: <the invariant or invariants, in one or two sentences>
 REPRODUCE: <steps> · EXPECTED: <result>

@@ -1,26 +1,26 @@
 ---
 name: engineering-builder-handoff
-description: "Use before the final message of meaningful engineering work Claude did as builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also when the user says finish and give me the report, prepare this for Codex, review handoff, or stop after the report. Not for a mechanical edit like a typo or copy fix unless a report is asked. Turns a bare done or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff a cold-session reviewer can verify, then stops. When the owner carries it to another session (review prompt, paste to Codex, agent to agent), it ships paste-ready with the reviewer's reply instructions, re-emitted each round. Complements software-engineering-build-standard; not for reviewing another agent's work."
+description: "Use before the final message of meaningful engineering work you did as builder, even when nobody asked for a report: a feature, bug fix, corrective patch for a reviewer finding, refactor, architecture, persistence, migration, database, data-model or state change, build, release, signing or platform work, test or tooling change, documentation foundation, technical-debt or security-sensitive change. Also when the user says finish and give me the report, prepare this for review, review handoff, or stop after the report. Not for a mechanical edit like a typo or copy fix unless a report is asked. Turns a bare done or tests pass into an evidence-based Compact, Standard, Full or Corrective handoff a cold-session reviewer can verify, then stops. When the owner carries it to another session (review prompt, paste to a reviewer, agent to agent), it ships paste-ready with the reviewer's reply instructions, re-emitted each round. Complements software-engineering-build-standard; not for reviewing another agent's work."
 ---
 
 # Engineering Builder Handoff
 
-When Claude, as the builder, finishes meaningful software engineering work, it does not end with "Done.", "Fixed.", "Tests pass." or "Everything looks good." It ends with an evidence-based handoff that an independent reviewer can verify in a new session without having watched the work. The reviewer is the one the project names — Codex when none is named.
+When an agent, as the builder, finishes meaningful software engineering work, it does not end with "Done.", "Fixed.", "Tests pass." or "Everything looks good." It ends with an evidence-based handoff that an independent reviewer can verify in a new session without having watched the work. The reviewer is the one the project or the owner names, whichever agent or person that is; when none is named, write "the reviewer". This skill never assumes which agent builds and which reviews.
 
-**Golden principle (H66):** the handoff is not written to prove Claude was right. It is written so another engineer can efficiently determine whether Claude was right.
+**Golden principle (H66):** the handoff is not written to prove the builder was right. It is written so another engineer can efficiently determine whether the builder was right.
 
 Anchors H1–H69 follow this standard's source specification, which has no H38. The `H` prefix keeps them distinct from the `§` anchors of software-engineering-build-standard. They are for citing this standard; handoffs do not need to include them.
 
 ## Role boundary
 
-This skill is for Claude as builder or implementer, never as reviewer.
+This skill is for the agent that built the work, never for the one reviewing it.
 
 - The handoff is a claim package for review, not the acceptance decision (H34). Its status is one of:
   - `DELIVERED FOR INDEPENDENT REVIEW` — the normal status;
   - `DELIVERED — NO INDEPENDENT REVIEW AUTHORIZED` — only when the owner has decided there will be no independent review;
   - `BLOCKED — OWNER DECISION REQUIRED` — the work cannot go further until the owner decides;
   - `ACCEPTED` — only when recording an acceptance the authorized reviewer or owner already gave, naming who gave it. An owner's remark such as "looks right" is an observation, not an acceptance, unless the owner says it is.
-- Call your own checks builder verification. Never say "independently verified" unless a genuinely independent agent performed that verification, and then attribute it by name. Claude's implementation, tests, probes and confidence are never proof of independent acceptance.
+- Call your own checks builder verification. Never say "independently verified" unless a genuinely independent agent performed that verification, and then attribute it by name. The builder's implementation, tests, probes and confidence are never proof of independent acceptance.
 - Never declare a reviewer's finding closed: write "M01 — CORRECTED / DELIVERED FOR RE-REVIEW", not "M01 CLOSED". Closure belongs to the independent reviewer or the accepted project process, unless that process explicitly assigns it differently (H26).
 - Do not use this skill to review another agent's delivery.
 
@@ -37,7 +37,7 @@ The flow is **BUILD → VERIFY → EVIDENCE → HANDOFF → STOP → INDEPENDENT
 
 ## When it applies (H1)
 
-Use it when Claude has completed meaningful engineering work: a feature, bug fix, corrective patch, refactor, repository restructuring, architecture slice, persistence, migration or database work, build or release work, signing, platform integration, test-architecture or tooling change, documentation foundation, technical-debt remediation, security-sensitive change, or data-model or state-model change. Use it also when the owner says "finish and give me the report", "prepare this for Codex", "handoff to Codex", "give me the engineering report", "prepare the review handoff" or "stop after the report".
+Use it when the builder has completed meaningful engineering work: a feature, bug fix, corrective patch, refactor, repository restructuring, architecture slice, persistence, migration or database work, build or release work, signing, platform integration, test-architecture or tooling change, documentation foundation, technical-debt remediation, security-sensitive change, or data-model or state-model change. Use it also when the owner says "finish and give me the report", "prepare this for the reviewer" (by role or by name), "hand this off for review", "give me the engineering report", "prepare the review handoff" or "stop after the report".
 
 It does not apply to mid-task progress notes, plans written before building, answers to questions, or reviews of someone else's work. A mechanical, low-risk edit — a typo, copy or formatting change with no effect on behavior — ends with a one-line summary instead, unless the owner asks for a report. Risk decides, not size: a one-line change to configuration, security, persisted data, a public interface or release identity is not mechanical and gets at least a Compact handoff. One task gets one handoff at the end — or a Blocked handoff earlier, when the work has to stop.
 
@@ -100,7 +100,7 @@ A quick read-only check to confirm the blocker is fine; continuing to build is n
 |---|---|
 | FACT | observable state: a commit hash, a file list, a version |
 | EVIDENCE | an observable result supporting a claim, with its location: test output, hash, log, screenshot, measurement |
-| BUILDER CLAIM | what Claude believes the work achieved; it needs evidence and is never evidence for itself (H40) |
+| BUILDER CLAIM | what the builder believes the work achieved; it needs evidence and is never evidence for itself (H40) |
 | UNVERIFIED ITEM | relevant but not checked: `NOT RUN`, `NOT VERIFIED`, `NOT MEASURED` |
 | KNOWN LIMITATION | a boundary of the delivery or of its verification, not a defect (H17) |
 | OPEN FINDING | an unresolved issue with its ID and an explicit status (H18) |
@@ -111,7 +111,7 @@ Not every line needs a prefix. What matters is that a reviewer can never mistake
 Use these phrases exactly where they apply:
 
 - **Status:** `DELIVERED FOR INDEPENDENT REVIEW` · `DELIVERED — NO INDEPENDENT REVIEW AUTHORIZED` · `BLOCKED — OWNER DECISION REQUIRED` · `ACCEPTED` (recording only)
-- **Next gate:** `DELIVERED FOR CODEX REVIEW` · `WAITING FOR HUMAN ACCEPTANCE` · `BLOCKED — OWNER DECISION REQUIRED`
+- **Next gate:** `WAITING FOR INDEPENDENT REVIEW` · `WAITING FOR HUMAN ACCEPTANCE` · `BLOCKED — OWNER DECISION REQUIRED`
 - **Verification:** `NOT RUN` · `NOT VERIFIED` · `NOT MEASURED` · `NOT CHECKED` · `NOT CAPTURED` · `NO REGRESSION FOUND WITHIN THE CHECKED SURFACES` · `PERFORMANCE: NOT MEASURED`
 - **Baseline and state:** `BASELINE NOT ESTABLISHED` · `TEST BASELINE: NOT ESTABLISHED` · `COMMIT: PENDING OWNER APPROVAL` · `COMMIT: NONE — NOT PERMITTED` · `ROLLBACK POINT: NONE ESTABLISHED`
 - **Change:** `NONE` · `CONTRACT / DATA CHANGE: NONE` · `INTENDED BEHAVIOR CHANGE: NONE` · `UNINTENDED BEHAVIOR CHANGE: NONE FOUND` · `DEVIATIONS: NONE` · `EXTERNAL SIDE EFFECTS: NONE` · `DEPENDENCIES: UNCHANGED`
@@ -139,7 +139,7 @@ Behavior: intended <the change> · unintended NONE FOUND in <what was checked> |
 Builder verification: <what ran, its result, where any evidence is> | NOT RUN — <why> · NOT VERIFIED: <gaps>
 Commit: <hash, message, pushed or not> | uncommitted — <why> | PENDING OWNER APPROVAL | NONE — NOT PERMITTED
 Reviewer, verify: <one to three concrete, independent checks>
-Next gate: <for example DELIVERED FOR CODEX REVIEW>
+Next gate: <for example WAITING FOR INDEPENDENT REVIEW>
 ```
 
 Example — one padding value changed. Its details are illustrative: report only the checks that actually ran.
@@ -153,7 +153,7 @@ Behavior: intended 8px more space below Save · unintended NONE FOUND on the set
 Builder verification: lint passed; searched for .save-row — used only on the settings screen; before/after screenshots at 1280px and 360px widths (evidence/save-row.png) · NOT VERIFIED: a physical phone
 Commit: a91d03b "Settings: more space below Save", not pushed
 Reviewer, verify: the settings screen on a physical phone; that the diff 4f2c9e1..a91d03b changes only this rule
-Next gate: DELIVERED FOR CODEX REVIEW
+Next gate: WAITING FOR INDEPENDENT REVIEW
 ```
 
 ### Standard order
@@ -169,7 +169,7 @@ Next gate: DELIVERED FOR CODEX REVIEW
 9. **Key claims and evidence** — each important claim beside the evidence that supports it, and where that evidence is (H14, H35, H40).
 10. **Git and side effects** — commit or working-tree state (H15); deviations and scope expansion (H16, H56); `EXTERNAL SIDE EFFECTS: NONE` or exactly what happened; any deletion or dependency change (H59, H60, H62).
 11. **Limitations, risks and findings** — known limitations (H17); risks, including known weaknesses you chose to leave, each with the smallest correction that would remove it; open findings with IDs and statuses (H18); newly discovered unrelated problems recorded as `BUILDER-DISCOVERED / PENDING REVIEW`, not silently fixed (H19).
-12. **Codex handoff** — the challenge list (H21, H39).
+12. **Reviewer handoff** — the challenge list (H21, H39).
 13. **Next gate** (H23) — then STOP.
 
 **Conditional sections** — include each whenever its condition holds, at any size. Because Full work is high-risk, a Full handoff always addresses the first three:
@@ -194,7 +194,7 @@ Start with the status line, then:
 - the regression test: failing on the old implementation (expected; `NOT CHECKED` needs a concrete reason), passing on the new one (or `NOT RUN` and why);
 - adjacent regression surfaces and the commit;
 - finding status `CORRECTED / DELIVERED FOR RE-REVIEW`;
-- the Codex re-review handoff and the next gate.
+- the re-review handoff and the next gate.
 
 Then add the Standard sections those items do not cover — files changed, contract / data change, behavior change, side effects, limitations and other findings — at the depth the size needs. A small corrective patch may carry all of it in a few lines.
 
@@ -206,7 +206,7 @@ Use precise, bounded statements: "Builder verification passed." — only when ev
 
 Avoid these unless the evidence proves exactly that statement: "Perfect." · "Definitely fixed." · "100% safe." · "No bugs." · "Production ready." · "No regressions." · "Everything is preserved." · "Independently verified." Never turn "the command exited 0" into a stronger claim than that command proves, and never call emulator, simulator or synthetic-input results device testing (H30).
 
-## Codex handoff (H21, H22, H39)
+## Reviewer handoff (H21, H22, H39)
 
 Tell the reviewer what to verify independently: never just "Please review", and never a verdict to sign.
 
@@ -235,7 +235,7 @@ Your next step: <the one thing the owner does now> | nothing
 - **Plain words.** Short sentences, in the language the owner writes in. No code marks, no capital status phrases, no anchors, and no finding ID without a few words saying what the finding is. A file name or a command appears only when the owner has to use it.
 - **A summary, never an addition.** Each line repeats something the handoff below says, and never says it more strongly. These are the builder's own checks: do not write "proven", "verified", "safe" or "it works". A check that failed or did not run is said here too; bad news is never left for the reviewer's part alone.
 - **Never a verdict.** The builder does not tell the owner to accept the work. "Your next step" names what the owner does at the next gate: paste the block to the reviewer, make the decision a Blocked handoff is waiting for, or nothing. For a Blocked handoff, write the question and each option here, one short plain line an option, with the builder's pick marked as a recommendation; never send the owner to read them "below".
-- **Ordinary text, never a code block.** The template above is fenced only to show its shape. Write the owner's lines as normal text with each label in bold. Many terminals show code blocks and code marks in a pale colour the owner cannot read.
+- **Ordinary text, never a code block.** The template above is fenced only to show its shape. Write the owner's lines as normal text: the heading **FOR YOU** on its own line first, then each label in bold. Many terminals show code blocks and code marks in a pale colour the owner cannot read.
 - **Short, one label a line.** Each label starts its own line, as in the template; never run them together into a paragraph. One or two sentences a label. When Blocked, add one line an option.
 - **A start line and a stop line.** The owner must see at a glance where the reviewer's part begins and where it ends. Put one bold line of ordinary text directly above it and one directly below it, outside any code block and outside any REVIEW PROMPT block:
   - above: `**▶ START — the part for <reviewer>. Copy from the next line.**` in relay mode, otherwise `**▶ START — the part for the reviewer. You do not need to read it.**`
@@ -251,14 +251,14 @@ FOR YOU
 What I did: added more space below the Save button on the settings screen.
 Checked by me: the style check passed, and the before and after pictures look right at desktop and phone width.
 Not checked: a real phone.
-Your next step: send the report below to Codex.
+Your next step: send the report below to the reviewer.
 ```
 
 ## Human relay to another session (H67, H68)
 
 Sometimes the owner carries the handoff to the reviewer — pasted into a different agent's session that shares none of this conversation. Then the handoff travels inside a marked, paste-ready block, and it carries the instructions that make the reviewer's reply paste-ready for the trip back. The owner ferries blocks; the owner never composes them and never has to ask for them.
 
-- **When relay mode applies.** The owner says the review happens in another session — "prepare this for Codex", "give me the review prompt", "agent to agent" — or the handoff is plainly the only context the reviewer will have. A reviewer who shares this session, or reads the delivery where the project keeps it, needs no block; relay mode stays off.
+- **When relay mode applies.** The owner says the review happens in another session — "prepare this for the reviewer", "give me the review prompt", "agent to agent" — or the handoff is plainly the only context the reviewer will have. A reviewer who shares this session, or reads the delivery where the project keeps it, needs no block; relay mode stays off.
 - **The owner's lines stay outside.** They sit above the block (H69), and "Your next step" says where to paste it. The reviewer never receives them.
 - **The block.** Wrap the whole handoff, unchanged, between `─── REVIEW PROMPT — paste to <reviewer> — round <N> ───` and `─── END REVIEW PROMPT ───`. One block per handoff; the owner copies one thing. The corrective patch after a reviewer's findings re-emits the block at the next round.
 - **The trailer.** Inside the block, after the handoff, append the reviewer instructions from `references/relay-prompt-format.md`: verify independently, report findings with file and line, and end with `APPROVED` or a `FIX PROMPT` block the owner pastes straight back. The trailer is standing text; the challenge list (H21) still says what to verify — the trailer only says how to reply. The reviewer needs no copy of this skill; the trailer carries the protocol.
@@ -274,7 +274,7 @@ When sensitive data or credentials were used during the work, say so without the
 
 ## Stop (H23, H24)
 
-End with the next gate — `DELIVERED FOR CODEX REVIEW` (for a re-review, name the finding), `WAITING FOR HUMAN ACCEPTANCE`, `BLOCKED — OWNER DECISION REQUIRED` with the decision named, or the project's own gate. When another step must come first or follows (an owner decision before review, an acceptance step after it), name the sequence. Then stop.
+End with the next gate — `WAITING FOR INDEPENDENT REVIEW` (for a re-review, name the finding), `WAITING FOR HUMAN ACCEPTANCE`, `BLOCKED — OWNER DECISION REQUIRED` with the decision named, or the project's own gate. When another step must come first or follows (an owner decision before review, an acceptance step after it), name the sequence. Then stop.
 
 Do not start the next feature, slice, refactor or corrective action, begin cleanup, fix other findings, or update unrelated roadmap items. Remaining capacity is not authorization.
 
@@ -296,9 +296,9 @@ Before sending a handoff, confirm each item below; for a Compact or Blocked hand
 12. Open findings are preserved with their IDs.
 13. No secrets or private data are present.
 14. The commit or working-tree state is clear.
-15. The Codex handoff asks for independent verification, not acceptance — or, with no independent review authorized, lists what only the builder checked.
+15. The reviewer handoff asks for independent verification, not acceptance — or, with no independent review authorized, lists what only the builder checked.
 16. The next gate is explicit.
-17. Claude stopped instead of starting unauthorized work.
+17. The builder stopped instead of starting unauthorized work.
 18. When the handoff relays through the owner to another session, it is inside the REVIEW PROMPT block with the trailer appended in full (H67, H68).
 19. The owner's lines open the handoff in plain words and ordinary text, say nothing the handoff does not say, give no verdict, and name the owner's next step; a bold start line and stop line frame the reviewer's part (H69).
 
@@ -312,7 +312,7 @@ Compact and Blocked handoffs are self-contained unless an emphasis mode or relay
 |---|---|---|
 | `references/core-handoff-contract.md` | Standard and Full handoffs, and Corrective handoffs at Full size | the full template and the rules for baseline, scope, owner decisions, implementation, files, contract and data, protected areas, behavior, Git, deviations and scope expansion, limitations, findings, IDs and severity, new defects, rollback, side effects, deletions, generated artifacts, dependencies and the next gate |
 | `references/verification-and-evidence.md` | Standard, Full and Corrective handoffs | tests, verification results, failure testing, regressions, claims and evidence, reproduction, before and after, tolerances, hashes, data preservation, repeated runs, environment, conflicting sources, performance, manual observation, private evidence |
-| `references/codex-review-handoff.md` | Full handoffs, and any Standard or Full handoff with no independent review authorized | the reviewer challenge list and its template, adversarial attack surfaces, the corrective re-review, the no-review handoff |
+| `references/reviewer-handoff.md` | Full handoffs, and any Standard or Full handoff with no independent review authorized | the reviewer challenge list and its template, adversarial attack surfaces, the corrective re-review, the no-review handoff |
 | `references/specialized-handoff-modes.md` | Corrective handoffs and any emphasis mode | Corrective, Refactor, Migration / persistence, Release / signing, Device, Documentation and Architecture |
 | `references/relay-prompt-format.md` | relay mode — a handoff the owner carries to a reviewer in a different session | the paste-ready block markers and round numbering, the reviewer trailer, and the return trip |
 

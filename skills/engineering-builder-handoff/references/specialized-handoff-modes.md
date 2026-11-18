@@ -44,8 +44,8 @@ DEVIATION FROM THE REQUIRED CORRECTION: NONE | <what differs, and who agreed>
 COMMIT: <hash and message> | uncommitted — <why> | COMMIT: PENDING OWNER APPROVAL | COMMIT: NONE — NOT PERMITTED
 SIDE EFFECTS · LIMITATIONS · OTHER FINDINGS: <as in the Standard order>
 FINDING STATUS: <ID> — CORRECTED / DELIVERED FOR RE-REVIEW
-CODEX RE-REVIEW HANDOFF: <for the reviewer to determine: whether the failure reproduces at the old commit and not at the new one; whether the regression test fails without the correction and passes with it; the adjacent surfaces; whether the finding closes or reopens>
-NEXT GATE: DELIVERED FOR CODEX REVIEW (re-review of <ID>)
+RE-REVIEW HANDOFF: <for the reviewer to determine: whether the failure reproduces at the old commit and not at the new one; whether the regression test fails without the correction and passes with it; the adjacent surfaces; whether the finding closes or reopens>
+NEXT GATE: WAITING FOR INDEPENDENT REVIEW (re-review of <ID>)
 ```
 
 - Fix the root cause the finding names, and run its regression test before handing off; `NOT RUN` is only for a test that genuinely could not run. Showing the test fail on the old implementation is expected for a corrective patch; `NOT CHECKED` needs a concrete reason. Record other problems noticed on the way as builder-discovered items instead of widening the patch.

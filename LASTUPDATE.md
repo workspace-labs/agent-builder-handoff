@@ -35,6 +35,17 @@ Your next step: <the one thing the owner does now> | nothing
   owner sees where it begins and ends.
 - **Final quality gate** gains item 19.
 
+## Also on 2026-11-18: no agent is named
+
+The skill no longer says which agent builds and which reviews. People pair
+agents in different ways, so the text now says "the builder" and "the
+reviewer", and the handoff names the reviewer the project or the owner names.
+
+- The next gate `DELIVERED FOR CODEX REVIEW` is now `WAITING FOR INDEPENDENT REVIEW`.
+- "Codex handoff" is now "Reviewer handoff"; `references/codex-review-handoff.md`
+  is now `references/reviewer-handoff.md`.
+- New hero picture, `media/builder-handoff-hero.png`; the old poster is removed.
+
 ## Earlier — 2026-09-29
 
 Relay mode (H67, H68): a handoff the owner carries to a reviewer in another

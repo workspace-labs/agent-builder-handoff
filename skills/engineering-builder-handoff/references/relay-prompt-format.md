@@ -24,7 +24,7 @@ The whole handoff, unchanged, between two marker lines:
 ─── END REVIEW PROMPT ───
 ```
 
-- Name the reviewer the project names — Codex when none is named.
+- Name the reviewer the project or the owner names; when none is named, write "the reviewer".
 - Round 1 for new work. The corrective patch after a reviewer's findings re-emits the block at the next round — `round 2`, `round 3` — so fatigue in a long loop stays visible to the owner, never hidden.
 - The owner's lines (H69) sit above the block, never inside it.
 - One block per handoff. Never wrap two handoffs in one block, and never emit a block for a Blocked handoff — a block travels to a reviewer; a Blocked handoff travels to the owner.

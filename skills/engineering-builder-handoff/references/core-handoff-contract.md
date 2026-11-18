@@ -1,6 +1,6 @@
 # Core handoff contract
 
-What a Standard, Full, Corrective or Blocked handoff states about the work itself: where it started, what was authorized, what changed, what did not, the repository state, deviations, limitations, findings and side effects. Rules for tests, results and evidence are in `verification-and-evidence.md`; the reviewer challenge list is in `codex-review-handoff.md`; mode emphasis is in `specialized-handoff-modes.md` — all in this folder.
+What a Standard, Full, Corrective or Blocked handoff states about the work itself: where it started, what was authorized, what changed, what did not, the repository state, deviations, limitations, findings and side effects. Rules for tests, results and evidence are in `verification-and-evidence.md`; the reviewer challenge list is in `reviewer-handoff.md`; mode emphasis is in `specialized-handoff-modes.md` — all in this folder.
 
 ## Contents
 
@@ -50,7 +50,7 @@ SIDE EFFECTS       EXTERNAL SIDE EFFECTS: NONE, or what happened · deletions ·
 LIMITATIONS        what the delivery and its verification do not cover
 RISKS              what could still go wrong, in the builder's view, including known weaknesses left in place and the smallest correction for each
 FINDINGS           ID — status, for every relevant finding · builder-discovered problems
-CODEX HANDOFF      the challenge list (codex-review-handoff.md)
+REVIEWER HANDOFF   the challenge list (reviewer-handoff.md)
 FAILURE TESTING    (conditional: high-risk work) failure paths exercised and results
 REPRODUCTION       (conditional: defects, migrations, device tests, important behavior changes) steps · EXPECTED / OBSERVED / RESULT
 ADVERSARIAL NOTES  (conditional: substantial or high-risk work) where this implementation is most likely weak
@@ -222,12 +222,12 @@ If dependencies changed, report the package, old and new versions, the reason, t
 
 Every substantial handoff states what happens next and whose move it is:
 
-- `DELIVERED FOR CODEX REVIEW`
+- `WAITING FOR INDEPENDENT REVIEW`
 - `WAITING FOR HUMAN ACCEPTANCE`
 - `BLOCKED — OWNER DECISION REQUIRED` — name the decision
 - or the project's own gate name: an accepted ADR's acceptance step, a board or pipeline stage
 
-When one gate must come before or after another, name the sequence: "BLOCKED — OWNER DECISION REQUIRED (is X in scope?), then Codex review", or "DELIVERED FOR CODEX REVIEW, then release-manager sign-off on staging per the ADR". A missing precondition the builder is not authorized to satisfy is named, never quietly skipped.
+When one gate must come before or after another, name the sequence: "BLOCKED — OWNER DECISION REQUIRED (is X in scope?), then independent review", or "WAITING FOR INDEPENDENT REVIEW, then release-manager sign-off on staging per the ADR". A missing precondition the builder is not authorized to satisfy is named, never quietly skipped.
 
 Then stop (H24). Never proceed into the next major task without explicit authorization.
 
@@ -238,5 +238,5 @@ Section names and order may adapt to the task and to a project's required format
 ## H51–H53 Writing for a reviewer who was not there
 
 - **A new session (H51).** No "as we discussed earlier", "the thing from before", "same as yesterday" or "you know the issue". Use exact finding IDs, commit hashes, paths, versions, contracts and reproduction steps. Self-contained does not mean retelling the project's history: point to it.
-- **A different agent (H52).** Do not assume the reviewer shares Claude's memory, reasoning or vocabulary. Use the repository's own terms, not nicknames coined during the session. Ground decisions in code, tests, docs, ADRs, the plan and the evidence — not in private conversation context.
+- **A different agent (H52).** Do not assume the reviewer shares the builder's memory, reasoning or vocabulary. Use the repository's own terms, not nicknames coined during the session. Ground decisions in code, tests, docs, ADRs, the plan and the evidence — not in private conversation context.
 - **No hidden chain-of-thought (H53).** Give conclusions, evidence and concise engineering rationale sufficient for independent verification. Do not expose, or depend on, private chain-of-thought.

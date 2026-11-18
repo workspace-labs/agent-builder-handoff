@@ -37,7 +37,7 @@ One line, for every project on your machine:
 npx skills add workspace-labs/agent-builder-handoff -g
 ```
 
-Or copy it by hand:
+Or copy it by hand, into your agent's skills folder (Claude Code shown here):
 
 ```bash
 git clone https://github.com/workspace-labs/agent-builder-handoff.git
@@ -45,7 +45,7 @@ mkdir -p ~/.claude/skills
 cp -R agent-builder-handoff/skills/engineering-builder-handoff ~/.claude/skills/
 ```
 
-It is written for Claude as the builder, with Codex as the reviewer unless a project names another.
+It does not care which agent builds and which reviews. Claude, Codex, Grok, DeepSeek or another: whoever built the work writes the handoff, and it names the reviewer your project names.
 
 It loads on its own when the builder finishes engineering work. The core is [`SKILL.md`](skills/engineering-builder-handoff/SKILL.md), and four reference files load only when the work needs them. A project's own rules, its recorded decisions and the owner's instructions always come first.
 
